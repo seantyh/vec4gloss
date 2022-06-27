@@ -1,4 +1,4 @@
 [core]
     autostage = true
-['remote "s3-vec4gloss"']
-    url = s3://seantyh-vec4gloss
+['remote "s3"']
+    url = s3://seantyh-vec4gloss/
