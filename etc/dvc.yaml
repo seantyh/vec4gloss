@@ -4,5 +4,5 @@ stages:
     deps:
     - ../data/def_frame_annot_sense_ids.txt
     outs:
-    - ../data/defgen_dataset_cwn
-    - ../data/denoising_dataset_cwn
+    - ../data/defgen_dataset_cwn/
+    - ../data/denoising_dataset_cwn/
