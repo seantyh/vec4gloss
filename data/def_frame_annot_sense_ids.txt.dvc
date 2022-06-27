@@ -1,0 +1,4 @@
+outs:
+- md5: 17742220218aeeb00d28831d705b3a02
+  size: 2878
+  path: def_frame_annot_sense_ids.txt
