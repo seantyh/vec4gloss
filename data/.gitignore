@@ -1,2 +1,4 @@
 /def_frame_annot_sense_ids.txt
 *.xlsx
+/defgen_dataset_cwn
+/denoising_dataset_cwn

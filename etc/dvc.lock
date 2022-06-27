@@ -1,0 +1,17 @@
+schema: '2.0'
+stages:
+  build_dataset:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 10.11-prepare-dataset.ipynb
+    deps:
+    - path: ../data/def_frame_annot_sense_ids.txt
+      md5: 17742220218aeeb00d28831d705b3a02
+      size: 2878
+    outs:
+    - path: ../data/defgen_dataset_cwn/
+      md5: 672ac4ba56930cf16784ce2ef4f43d59.dir
+      size: 14779010
+      nfiles: 8
+    - path: ../data/denoising_dataset_cwn/
+      md5: 40b06eafd83f7a447675d7b53b729399.dir
+      size: 3053430
+      nfiles: 8
