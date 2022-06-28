@@ -2,6 +2,6 @@
     autostage = true
     remote = s3
 [cache]
-    type = copy
+    type = "hardlink,symlink"
 ['remote "s3"']
     url = s3://seantyh-vec4gloss/
