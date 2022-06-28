@@ -6,12 +6,15 @@ stages:
     - path: ../data/def_frame_annot_sense_ids.txt
       md5: 17742220218aeeb00d28831d705b3a02
       size: 2878
+    - path: 10.11-prepare-dataset.ipynb
+      md5: 8e03d344a1b5a5aa04d66cd4f2653bc8
+      size: 133488
     outs:
     - path: ../data/defgen_dataset_cwn/
-      md5: 672ac4ba56930cf16784ce2ef4f43d59.dir
-      size: 14779010
-      nfiles: 8
+      md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
+      size: 14780403
+      nfiles: 7
     - path: ../data/denoising_dataset_cwn/
-      md5: 40b06eafd83f7a447675d7b53b729399.dir
-      size: 3053430
-      nfiles: 8
+      md5: 854cc295b0dbf3f2bbfe71bb3a9304de.dir
+      size: 3053951
+      nfiles: 7
