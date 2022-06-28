@@ -7,14 +7,14 @@ stages:
       md5: 17742220218aeeb00d28831d705b3a02
       size: 2878
     - path: 10.11-prepare-dataset.ipynb
-      md5: 8e03d344a1b5a5aa04d66cd4f2653bc8
-      size: 133488
+      md5: 942c0fe5c2e6c7d92a5fafcb6ee722ba
+      size: 133421
     outs:
     - path: ../data/defgen_dataset_cwn/
       md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
-      size: 14780403
+      size: 14780471
       nfiles: 7
     - path: ../data/denoising_dataset_cwn/
-      md5: 854cc295b0dbf3f2bbfe71bb3a9304de.dir
-      size: 3053951
+      md5: ea436df33391bb96a56aa1f65724c314.dir
+      size: 2962927
       nfiles: 7
