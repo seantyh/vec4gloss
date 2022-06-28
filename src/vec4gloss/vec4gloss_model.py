@@ -11,10 +11,10 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
 
     def forward(
         self,        
-        input_ids: Optional[torch.LongTensor],
-        start_markers: torch.LongTensor,
-        end_markers: torch.LongTensor,
-        attention_mask: Optional[torch.FloatTensor],        
+        input_ids: Optional[torch.LongTensor] = None,        
+        attention_mask: Optional[torch.FloatTensor] = None,
+        decoder_start_markers: torch.LongTensor = None,
+        decoder_end_markers: torch.LongTensor = None,
         decoder_input_ids: Optional[torch.LongTensor] = None,
         decoder_attention_mask: Optional[torch.BoolTensor] = None,
         head_mask: Optional[torch.FloatTensor] = None,
@@ -33,33 +33,43 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
         r"""
         Following https://github.com/huggingface/transformers/blob/v4.20.1/src/transformers/models/t5/modeling_t5.py#L1456
         But only implement model training and inference code (no parallelism)
+        
+        adding two parameters: `decoder_start_markers` and `decoder_end_markers`.
+        These parameters are prefixed with `decoder_` to be compatible with hgf's generate mechanism, 
+        where it pass all arguments into Encoder alone, and only `decoder_` prefixed parameters are kept in
+        generation process`
         """
 
         # Encode
-        encoder_outputs = self.encoder(
-                input_ids=input_ids,
-                attention_mask=attention_mask,
-                inputs_embeds=inputs_embeds,
-                head_mask=head_mask,
-                output_attentions=output_attentions,
-                output_hidden_states=output_hidden_states,
-                return_dict=return_dict,
-            )
+        if encoder_outputs is None:
+            encoder_outputs = self.encoder(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    inputs_embeds=inputs_embeds,
+                    head_mask=head_mask,
+                    output_attentions=output_attentions,
+                    output_hidden_states=output_hidden_states,
+                    return_dict=return_dict,
+                )
+        
         
         # an ugly implementation. a better way?
         enc_last_hiddens = torch.zeros(
-            (start_markers.shape[0], # batch size
+            (decoder_start_markers.shape[0], # batch size
              1, # sequence length
              self.model_dim # model dimension
             ), dtype=encoder_outputs.last_hidden_state.dtype
-        )
-        enc_attention_mask = torch.ones(
-            (start_markers.shape[0], 1)
-        )
+        ).to(self.device)
         
-        for i in torch.arange(start_markers.shape[0]):
-            s, e = start_markers[i], end_markers[i]
+        enc_attention_mask = torch.ones(
+            (decoder_start_markers.shape[0], 1)
+        ).to(self.device)
+        
+        for i in torch.arange(decoder_start_markers.shape[0]):
+            s, e = decoder_start_markers[i], decoder_end_markers[i]
             enc_last_hiddens[i, 0, :] = encoder_outputs.last_hidden_state[i, s:e, :].mean(axis=0)        
+        
+        
 
         # Decode
         decoder_outputs = self.decoder(
@@ -103,10 +113,39 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
             decoder_hidden_states=decoder_outputs.hidden_states,
             decoder_attentions=decoder_outputs.attentions,
             cross_attentions=decoder_outputs.cross_attentions,
-            encoder_last_hidden_state=encoder_outputs.last_hidden_state,
+            encoder_last_hidden_state=enc_last_hiddens,
             encoder_hidden_states=encoder_outputs.hidden_states,
             encoder_attentions=encoder_outputs.attentions,
-        ), enc_last_hiddens
+        )
+        
+    def prepare_inputs_for_generation(
+        self,
+        input_ids,
+        decoder_start_markers=None,
+        decoder_end_markers=None,
+        past=None,
+        attention_mask=None,
+        head_mask=None,
+        decoder_head_mask=None,
+        cross_attn_head_mask=None,
+        use_cache=None,
+        encoder_outputs=None,        
+        **kwargs
+    ):
 
-
-
+        # cut decoder_input_ids if past is used
+        if past is not None:
+            input_ids = input_ids[:, -1:]
+                
+        return {
+            "decoder_input_ids": input_ids,
+            "decoder_start_markers": decoder_start_markers,
+            "decoder_end_markers": decoder_end_markers,
+            "past_key_values": past,
+            "encoder_outputs": encoder_outputs,
+            "attention_mask": attention_mask,
+            "head_mask": head_mask,
+            "decoder_head_mask": decoder_head_mask,
+            "cross_attn_head_mask": cross_attn_head_mask,
+            "use_cache": use_cache,
+        }
