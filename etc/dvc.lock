@@ -11,10 +11,10 @@ stages:
       size: 133421
     outs:
     - path: ../data/defgen_dataset_cwn/
-      md5: df5ea0d54666f716fd01d4ac8c49a77c.dir
-      size: 136975791
-      nfiles: 18
+      md5: 2a7fed04cae6ede3f05b34526000e2c2.dir
+      size: 389602487
+      nfiles: 44
     - path: ../data/denoising_dataset_cwn/
-      md5: 35521ce0f6efff0a7f6e4002d7267747.dir
-      size: 12874375
-      nfiles: 12
+      md5: 18a39abac9cf1d0fa61269fe6f68c454.dir
+      size: 13221871
+      nfiles: 13
