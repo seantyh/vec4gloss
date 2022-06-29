@@ -16,6 +16,7 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
         decoder_start_markers: torch.LongTensor = None,
         decoder_end_markers: torch.LongTensor = None,
         decoder_input_ids: Optional[torch.LongTensor] = None,
+        decoder_encoder_vector: Optional[torch.FloatTensor] = None,
         decoder_attention_mask: Optional[torch.BoolTensor] = None,
         head_mask: Optional[torch.FloatTensor] = None,
         decoder_head_mask: Optional[torch.FloatTensor] = None,
@@ -41,7 +42,9 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
         """
 
         # Encode
-        if encoder_outputs is None:
+        ## only do encoding if no encoder_outputs (normal generation setting) 
+        ## and no decoder_encoder_vector (vector-only generation setting)
+        if encoder_outputs is None and decoder_encoder_vector is None:            
             encoder_outputs = self.encoder(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
@@ -52,25 +55,29 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
                     return_dict=return_dict,
                 )
         
-        
-        # an ugly implementation. a better way?
-        enc_last_hiddens = torch.zeros(
-            (decoder_start_markers.shape[0], # batch size
-             1, # sequence length
-             self.model_dim # model dimension
-            ), dtype=encoder_outputs.last_hidden_state.dtype
-        ).to(self.device)
-        
-        enc_attention_mask = torch.ones(
-            (decoder_start_markers.shape[0], 1)
-        ).to(self.device)
-        
-        for i in torch.arange(decoder_start_markers.shape[0]):
-            s, e = decoder_start_markers[i], decoder_end_markers[i]
-            enc_last_hiddens[i, 0, :] = encoder_outputs.last_hidden_state[i, s:e, :].mean(axis=0)        
-        
-        
+        if decoder_encoder_vector is None:            
+            # an ugly implementation. a better way?
+            enc_last_hiddens = torch.zeros(
+                (decoder_start_markers.shape[0], # batch size
+                 1, # sequence length
+                 self.model_dim # model dimension
+                ), dtype=encoder_outputs.last_hidden_state.dtype
+            ).to(self.device)
 
+            enc_attention_mask = torch.ones(
+                (decoder_start_markers.shape[0], 1)
+            ).to(self.device)
+
+            for i in torch.arange(decoder_start_markers.shape[0]):
+                s, e = decoder_start_markers[i], decoder_end_markers[i]
+                ## last_hidden_state[i, s:e, :].mean(axis=0)
+                ## the axis 0 denotes the sequence length dimension 
+                ## (note batch dim is already a singleton after index selection)
+                enc_last_hiddens[i, 0, :] = encoder_outputs.last_hidden_state[i, s:e, :].mean(axis=0)        
+        else:            
+            enc_last_hiddens = decoder_encoder_vector.to(self.device)
+            enc_attention_mask = torch.ones(decoder_encoder_vector.shape[0], 1).to(self.device)
+                
         # Decode
         decoder_outputs = self.decoder(
             input_ids=decoder_input_ids,
@@ -123,6 +130,7 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
         input_ids,
         decoder_start_markers=None,
         decoder_end_markers=None,
+        decoder_encoder_vector=None,
         past=None,
         attention_mask=None,
         head_mask=None,
@@ -141,6 +149,7 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
             "decoder_input_ids": input_ids,
             "decoder_start_markers": decoder_start_markers,
             "decoder_end_markers": decoder_end_markers,
+            "decoder_encoder_vector": decoder_encoder_vector,
             "past_key_values": past,
             "encoder_outputs": encoder_outputs,
             "attention_mask": attention_mask,
