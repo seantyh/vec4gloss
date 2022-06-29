@@ -8,16 +8,16 @@ stages:
       size: 2878
     - path: 10.11-prepare-dataset.ipynb
       md5: 942c0fe5c2e6c7d92a5fafcb6ee722ba
-      size: 133421
+      size: 137786
     outs:
     - path: ../data/defgen_dataset_cwn/
-      md5: 2a7fed04cae6ede3f05b34526000e2c2.dir
-      size: 389602487
-      nfiles: 44
+      md5: f265f710cd55fd06d55188dcfab1b1e2.dir
+      size: 265995199
+      nfiles: 30
     - path: ../data/denoising_dataset_cwn/
-      md5: 18a39abac9cf1d0fa61269fe6f68c454.dir
-      size: 13221871
-      nfiles: 13
+      md5: 35521ce0f6efff0a7f6e4002d7267747.dir
+      size: 12874375
+      nfiles: 12
   train_defgen_v1.0:
     cmd: jupyter nbconvert --to notebook --execute --inplace 20.20-defgen-training.ipynb
     deps:
