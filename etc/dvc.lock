@@ -18,3 +18,48 @@ stages:
       md5: 18a39abac9cf1d0fa61269fe6f68c454.dir
       size: 13221871
       nfiles: 13
+  train_defgen_v1.0:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.20-defgen-training.ipynb
+    deps:
+    - path: ../data/defgen_dataset_cwn/
+      md5: 2a7fed04cae6ede3f05b34526000e2c2.dir
+      size: 389602487
+      nfiles: 44
+    - path: 20.20-defgen-training.ipynb
+      md5: d6e23506314a47ffc0c32422199f7070
+      size: 114234
+    outs:
+    - path: ../data/models/vec4gloss-defgen-220628-1546/
+      md5: ddd06bf7c2fc4d3dad3e689882d9fcae.dir
+      size: 2350329979
+      nfiles: 7
+  train_denoise_v1.0:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.10-denoise-training.ipynb
+    deps:
+    - path: ../data/denoising_dataset_cwn/
+      md5: 18a39abac9cf1d0fa61269fe6f68c454.dir
+      size: 13221871
+      nfiles: 13
+    - path: 20.10-denoise-training.ipynb
+      md5: c27ab08c6c32f58a3404359cc20b56bf
+      size: 107535
+    outs:
+    - path: ../data/models/vec4gloss-denoise-220628-1510/
+      md5: 15225cbd45cd7a38d972fc8c3b2450a0.dir
+      size: 2350345182
+      nfiles: 7
+  train_defgen_v1.1:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.21-defgen-training-run2.ipynb
+    deps:
+    - path: ../data/defgen_dataset_cwn/
+      md5: 2a7fed04cae6ede3f05b34526000e2c2.dir
+      size: 389602487
+      nfiles: 44
+    - path: 20.21-defgen-training-run2.ipynb
+      md5: 821fd7b3e2ed6a327ffe6e90e8b67029
+      size: 112378
+    outs:
+    - path: ../data/models/vec4gloss-defgen-220629-1250/
+      md5: e0f49df34efc0a772f06915b441cb224.dir
+      size: 2350329979
+      nfiles: 7

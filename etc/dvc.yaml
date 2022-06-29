@@ -7,3 +7,29 @@ stages:
     outs:
     - ../data/defgen_dataset_cwn/
     - ../data/denoising_dataset_cwn/
+  train_denoise_v1.0:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.10-denoise-training.ipynb
+    deps:
+    - 20.10-denoise-training.ipynb
+    - ../data/denoising_dataset_cwn/
+    outs:
+    - ../data/models/vec4gloss-denoise-220628-1510/
+  train_defgen_v1.0:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.20-defgen-training.ipynb
+    deps:
+    - 20.20-defgen-training.ipynb
+    - ../data/defgen_dataset_cwn/
+    outs:
+    - ../data/models/vec4gloss-defgen-220628-1546/
+    desc: |
+      v1.0 is a defgen model based on the denoising pretrained model, and runs for 5 epochs
+  train_defgen_v1.1:
+    cmd: jupyter nbconvert --to notebook --execute --inplace 20.21-defgen-training-run2.ipynb
+    deps:
+    - 20.21-defgen-training-run2.ipynb
+    - ../data/defgen_dataset_cwn/
+    outs:
+    - ../data/models/vec4gloss-defgen-220629-1250/
+    desc: |
+      v1.1 is same as v1.0, but runs for 10 epochs
+    
