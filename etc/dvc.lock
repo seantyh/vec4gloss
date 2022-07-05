@@ -79,5 +79,5 @@ stages:
       nfiles: 7
     outs:
     - path: ../data/rating_materials.csv
-      md5: 593e9297a4aacdac8f86ef91050171d1
-      size: 11970
+      md5: 4e2ab226f5fd9bbd515d35a136f9efb2
+      size: 11964
