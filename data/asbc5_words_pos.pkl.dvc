@@ -1,0 +1,4 @@
+outs:
+- md5: 6151ef0b05891f1f2730d619f122b40b
+  size: 4796273
+  path: asbc5_words_pos.pkl

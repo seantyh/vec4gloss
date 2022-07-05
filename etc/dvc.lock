@@ -11,13 +11,13 @@ stages:
       size: 137786
     outs:
     - path: ../data/defgen_dataset_cwn/
-      md5: f265f710cd55fd06d55188dcfab1b1e2.dir
-      size: 265995199
-      nfiles: 30
+      md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
+      size: 14780471
+      nfiles: 7
     - path: ../data/denoising_dataset_cwn/
-      md5: 35521ce0f6efff0a7f6e4002d7267747.dir
-      size: 12874375
-      nfiles: 12
+      md5: ea436df33391bb96a56aa1f65724c314.dir
+      size: 2962927
+      nfiles: 7
   train_defgen_v1.0:
     cmd: jupyter nbconvert --to notebook --execute --inplace 20.20-defgen-training.ipynb
     deps:
@@ -63,3 +63,21 @@ stages:
       md5: e0f49df34efc0a772f06915b441cb224.dir
       size: 2350329979
       nfiles: 7
+  prepare_rating:
+    cmd: nbconvert --execute --inplace --to notebook 30.01-prepare-rating.ipynb
+    deps:
+    - path: ../data/asbc5_words_pos.pkl
+      md5: 6151ef0b05891f1f2730d619f122b40b
+      size: 4796273
+    - path: ../data/defgen_dataset_cwn
+      md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
+      size: 14780471
+      nfiles: 7
+    - path: ../data/models/vec4gloss-defgen-220629-1250
+      md5: e0f49df34efc0a772f06915b441cb224.dir
+      size: 2350329979
+      nfiles: 7
+    outs:
+    - path: ../data/rating_materials.csv
+      md5: e244debff4ac8c771abd6922bd43cc93
+      size: 12127
