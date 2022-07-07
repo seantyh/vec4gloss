@@ -1,7 +1,7 @@
 
 import torch
 from transformers import MT5ForConditionalGeneration
-from transformers.modeling_outputs import Seq2SeqLMOutput
+from transformers.modeling_outputs import Seq2SeqLMOutput, BaseModelOutput
 from typing import Optional, Union, Tuple
 from torch.nn import CrossEntropyLoss
 
@@ -78,6 +78,13 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
             enc_last_hiddens = decoder_encoder_vector.to(self.device)
             enc_attention_mask = torch.ones(decoder_encoder_vector.shape[0], 1).to(self.device)
                 
+        if encoder_outputs is None:
+            ## create a `encoder_ouputs` dummy        
+            ## this is just a standin replacement for the data structure 
+            ## the content is otherwise unused in the decoder
+            ## All the decoder uses are the enc_last_hiddens and enc_attention_mask.
+            encoder_outputs = BaseModelOutput() if return_dict else ()
+        
         # Decode
         decoder_outputs = self.decoder(
             input_ids=decoder_input_ids,
@@ -144,7 +151,8 @@ class Vec4GlossModel(MT5ForConditionalGeneration):
         # cut decoder_input_ids if past is used
         if past is not None:
             input_ids = input_ids[:, -1:]
-                
+        
+        setattr(self, "_encoder_outputs", encoder_outputs)
         return {
             "decoder_input_ids": input_ids,
             "decoder_start_markers": decoder_start_markers,
