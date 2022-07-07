@@ -1,0 +1,4 @@
+outs:
+- md5: ef2bb2afa4ef6b90736a8f3f0de132d6
+  size: 160278
+  path: annotation.json
