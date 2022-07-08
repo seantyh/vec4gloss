@@ -42,3 +42,11 @@ stages:
     outs:
     - ../data/rating_materials.csv:
         cache: false
+  rating_stat:
+    cmd: nbconvert --inplace --execute --to notebook 30.10-rating-data-eda-1.ipynb
+    deps:
+    - ../data/rating_materials.n10.csv
+    - ../data/rating_raw_data_220707.csv
+    - 30.10-rating-data-eda-1.ipynb
+    outs:
+    - ../data/rating_response_stat.csv

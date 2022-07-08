@@ -1,4 +1,4 @@
 outs:
 - md5: 5b2dd3bf93413a4cea84b5bac3f9f674
   size: 29257
-  path: data/rating_raw_data_220707.csv
+  path: rating_raw_data_220707.csv

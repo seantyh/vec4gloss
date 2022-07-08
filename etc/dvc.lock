@@ -81,3 +81,19 @@ stages:
     - path: ../data/rating_materials.csv
       md5: 4e2ab226f5fd9bbd515d35a136f9efb2
       size: 11964
+  rating_stat:
+    cmd: nbconvert --inplace --execute --to notebook 30.10-rating-data-eda-1.ipynb
+    deps:
+    - path: ../data/rating_materials.n10.csv
+      md5: dccc4e919168464f8234fcdf64fdf7a9
+      size: 14127
+    - path: ../data/rating_raw_data_220707.csv
+      md5: 5b2dd3bf93413a4cea84b5bac3f9f674
+      size: 29257
+    - path: 30.10-rating-data-eda-1.ipynb
+      md5: d7524eb7b5b9ecee385e86dd8ebbaac6
+      size: 115740
+    outs:
+    - path: ../data/rating_response_stat.csv
+      md5: c7ec6a11a80fc82917ffc59368348265
+      size: 18895
