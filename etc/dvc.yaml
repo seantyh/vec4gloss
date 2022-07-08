@@ -42,6 +42,15 @@ stages:
     outs:
     - ../data/rating_materials.csv:
         cache: false
+  prepare_rating.n10:
+    cmd: nbconvert --execute --inplace --to notebook 30.01-prepare-rating.ipynb
+    deps:
+    - ../data/asbc5_words_pos.pkl
+    - ../data/defgen_dataset_cwn
+    - ../data/models/vec4gloss-defgen-220629-1250
+    outs:
+    - ../data/rating_materials.n10.csv:
+        cache: false
   rating_stat:
     cmd: nbconvert --inplace --execute --to notebook 30.10-rating-data-eda-1.ipynb
     deps:

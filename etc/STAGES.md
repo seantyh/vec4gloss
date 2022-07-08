@@ -3,20 +3,25 @@ flowchart TD
 	node1["..\data\annotation.json.dvc"]
 	node2["..\data\asbc5_words_pos.pkl.dvc"]
 	node3["..\data\def_frame_annot_sense_ids.txt.dvc"]
-	node4["build_dataset"]
-	node5["prepare_rating"]
-	node6["train_defgen_v1.0"]
-	node7["train_defgen_v1.1"]
-	node8["train_denoise_v1.0"]
-	node2-->node5
-	node3-->node4
-	node4-->node5
-	node4-->node6
-	node4-->node7
+	node4["..\data\rating_raw_data_220707.csv.dvc"]
+	node5["build_dataset"]
+	node6["prepare_rating"]
+	node7["prepare_rating.n10"]
+	node8["rating_stat"]
+	node9["train_defgen_v1.0"]
+	node10["train_defgen_v1.1"]
+	node11["train_denoise_v1.0"]
+	node2-->node6
+	node2-->node7
+	node3-->node5
 	node4-->node8
-	node7-->node5
-	node9["..\data\def_frame_annotations.xlsx.dvc"]
-	node10["..\data\rating_raw_data_220707.csv.dvc"]
-	node11["rating_stat"]
-	node10-->node11
+	node5-->node6
+	node5-->node7
+	node5-->node9
+	node5-->node10
+	node5-->node11
+	node7-->node8
+	node10-->node6
+	node10-->node7
+	node12["..\data\def_frame_annotations.xlsx.dvc"]
 ```

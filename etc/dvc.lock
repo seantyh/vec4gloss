@@ -97,3 +97,21 @@ stages:
     - path: ../data/rating_response_stat.csv
       md5: c7ec6a11a80fc82917ffc59368348265
       size: 18895
+  prepare_rating.n10:
+    cmd: nbconvert --execute --inplace --to notebook 30.01-prepare-rating.ipynb
+    deps:
+    - path: ../data/asbc5_words_pos.pkl
+      md5: 6151ef0b05891f1f2730d619f122b40b
+      size: 4796273
+    - path: ../data/defgen_dataset_cwn
+      md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
+      size: 14780471
+      nfiles: 7
+    - path: ../data/models/vec4gloss-defgen-220629-1250
+      md5: e0f49df34efc0a772f06915b441cb224.dir
+      size: 2350329979
+      nfiles: 7
+    outs:
+    - path: ../data/rating_materials.n10.csv
+      md5: dccc4e919168464f8234fcdf64fdf7a9
+      size: 14127

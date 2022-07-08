@@ -9,16 +9,21 @@ flowchart TD
 	node7["data\models\vec4gloss-defgen-220629-1250"]
 	node8["data\models\vec4gloss-denoise-220628-1510"]
 	node9["data\rating_materials.csv"]
+	node10["data\rating_materials.n10.csv"]
+	node11["data\rating_raw_data_220707.csv"]
+	node12["data\rating_response_stat.csv"]
 	node2-->node9
+	node2-->node10
 	node3-->node4
 	node3-->node5
 	node4-->node6
 	node4-->node7
 	node4-->node9
+	node4-->node10
 	node5-->node8
 	node7-->node9
-	node10["data\def_frame_annotations.xlsx"]
-	node11["data\rating_raw_data_220707.csv"]
-	node12["data\rating_response_stat.csv"]
+	node7-->node10
+	node10-->node12
 	node11-->node12
+	node13["data\def_frame_annotations.xlsx"]
 ```
