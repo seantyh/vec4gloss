@@ -59,3 +59,10 @@ stages:
     - 30.10-rating-data-eda-1.ipynb
     outs:
     - ../data/rating_response_stat.csv
+  build-annotframe:
+    cmd: nbconvert --to notebook --execute --inplace 30.23-build-annot-frameinfo.ipynb
+    deps:
+    - ../data/annotation.json
+    - ../data/models/vec4gloss-defgen-220629-1250
+    outs:
+    - ../data/annot_frameinfo_list.pkl

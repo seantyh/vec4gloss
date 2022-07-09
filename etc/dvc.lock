@@ -115,3 +115,17 @@ stages:
     - path: ../data/rating_materials.n10.csv
       md5: dccc4e919168464f8234fcdf64fdf7a9
       size: 14127
+  build-annotframe:
+    cmd: nbconvert --to notebook --execute --inplace 30.23-build-annot-frameinfo.ipynb
+    deps:
+    - path: ../data/annotation.json
+      md5: ef2bb2afa4ef6b90736a8f3f0de132d6
+      size: 160278
+    - path: ../data/models/vec4gloss-defgen-220629-1250
+      md5: e0f49df34efc0a772f06915b441cb224.dir
+      size: 2350329979
+      nfiles: 7
+    outs:
+    - path: ../data/annot_frameinfo_list.pkl
+      md5: e95b46b50d7a9171d59a779b9e0d6190
+      size: 2131725
