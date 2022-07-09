@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 from dataclasses import dataclass
 from .dep_win import DepWinOutput
 
@@ -61,4 +61,9 @@ class AnnotDepInfo:
 @dataclass
 class AnnotFrameInfo:
     annot_frame: AnnotFrame
+    dep_info: AnnotDepInfo
+
+@dataclass
+class NounFrameInfo:
+    noun_entry: Dict[str, any]
     dep_info: AnnotDepInfo
