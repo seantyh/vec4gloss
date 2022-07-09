@@ -51,6 +51,7 @@ stages:
     outs:
     - ../data/rating_materials.n10.csv:
         cache: false
+    - ../data/rating_materials.n10.raw.pkl
   rating_stat:
     cmd: nbconvert --inplace --execute --to notebook 30.10-rating-data-eda-1.ipynb
     deps:

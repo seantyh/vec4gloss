@@ -115,6 +115,9 @@ stages:
     - path: ../data/rating_materials.n10.csv
       md5: dccc4e919168464f8234fcdf64fdf7a9
       size: 14127
+    - path: ../data/rating_materials.n10.raw.pkl
+      md5: 632477a1f5070897f8186d7bcdf2312f
+      size: 35700
   build-annotframe:
     cmd: nbconvert --to notebook --execute --inplace 30.23-build-annot-frameinfo.ipynb
     deps:
