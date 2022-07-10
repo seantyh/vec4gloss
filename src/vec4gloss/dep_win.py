@@ -18,9 +18,10 @@ class DepWinOutput:
     dep_text: str 
     
     def __repr__(self):
-        return "({:>2d}-{:>2d}) [{:5.2f}] {:\u3000>2s} / {}".format(
+        return "({:>2d}-{:>2d}) [{:5.2f}/{:.2f}] {:\u3000>2s} / {}".format(
             self.mask_win[0], self.mask_win[1], 
-            self.lratio, self.token_text, self.dep_text)
+            self.lratio, self.token_prob, 
+            self.token_text, self.dep_text)
     
 def compute_mean_vec(examples, tokenizer, model): 
     enc_vecs = []

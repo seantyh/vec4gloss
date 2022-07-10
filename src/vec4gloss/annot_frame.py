@@ -53,7 +53,20 @@ class AnnotDepInfo:
         return self.dep_wins[self.sel_dep_idx]
     
     def token_prob(self):
+        """
+        alias for full_token_prob
+        """
+        return self.full_token_prob()
+    
+    def full_token_prob(self):
         return self.dep_wins[0].token_prob
+    
+    def nodep_token_prob(self):
+        return self.dep_wins[self.sel_dep_idx].token_prob
+    
+    def fullmasked_token_prob(self):
+        full_mask = sorted(self.dep_wins, key=lambda x: x.mask_win[0]-x.mask_win[1])        
+        return full_mask[0].token_prob
     
     def dep_lratio(self):
         return self.dep_wins[self.sel_dep_idx].lratio
@@ -61,9 +74,9 @@ class AnnotDepInfo:
 @dataclass
 class AnnotFrameInfo:
     annot_frame: AnnotFrame
-    dep_info: AnnotDepInfo
+    dep_info: List[AnnotDepInfo]        
 
 @dataclass
 class NounFrameInfo:
     noun_entry: Dict[str, any]
-    dep_info: AnnotDepInfo
+    dep_info: List[AnnotDepInfo]
