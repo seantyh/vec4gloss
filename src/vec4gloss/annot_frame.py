@@ -1,6 +1,6 @@
-from typing import List, Dict
+from typing import List, Dict, Any
 from dataclasses import dataclass
-from .dep_win import DepWinOutput
+from .token_param import TokenParam
 
 @dataclass
 class Scheme:
@@ -39,44 +39,11 @@ class AnnotFrame:
         ]))
 
 @dataclass
-class AnnotDepInfo:
-    tgt_idx: int
-    dep_wins: List[DepWinOutput]
-    sel_dep_idx: int
-    
-    def __repr__(self):
-        return "<AnnotDepInfo ({}) {:.2f}: {}>".format(
-            self.tgt_idx, self.token_prob(),
-            self.dep_win())
-    
-    def dep_win(self):
-        return self.dep_wins[self.sel_dep_idx]
-    
-    def token_prob(self):
-        """
-        alias for full_token_prob
-        """
-        return self.full_token_prob()
-    
-    def full_token_prob(self):
-        return self.dep_wins[0].token_prob
-    
-    def nodep_token_prob(self):
-        return self.dep_wins[self.sel_dep_idx].token_prob
-    
-    def fullmasked_token_prob(self):
-        full_mask = sorted(self.dep_wins, key=lambda x: x.mask_win[0]-x.mask_win[1])        
-        return full_mask[0].token_prob
-    
-    def dep_lratio(self):
-        return self.dep_wins[self.sel_dep_idx].lratio
-    
-@dataclass
 class AnnotFrameInfo:
     annot_frame: AnnotFrame
-    dep_info: List[AnnotDepInfo]        
+    dep_info: List[TokenParam]        
 
 @dataclass
-class NounFrameInfo:
-    noun_entry: Dict[str, any]
-    dep_info: List[AnnotDepInfo]
+class RatingFrameInfo:
+    noun_entry: Dict[str, Any]
+    dep_info: List[TokenParam]
