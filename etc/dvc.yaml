@@ -60,17 +60,17 @@ stages:
     - 30.10-rating-data-eda-1.ipynb
     outs:
     - ../data/rating_response_stat.csv
-  build-annotframe:
-    cmd: nbconvert --to notebook --execute --inplace 30.23-build-annot-frameinfo.ipynb
+  build-annot-params:
+    cmd: nbconvert --to notebook --execute --inplace 30.41-build-annot-token-param.ipynb
     deps:
     - ../data/annotation.json
     - ../data/models/vec4gloss-defgen-220629-1250
     outs:
-    - ../data/annot_frameinfo_list.pkl
-  build-nounframe:
-    cmd: nbconvert --to notebook --execute --inplace 30.26-build-noun-depinfo.ipynb
+    - ../data/annot_tokenparams_list.pkl
+  build-rating-params:
+    cmd: nbconvert --to notebook --execute --inplace 30.42-build-rating-token-param.ipynb
     deps:
     - ../data/rating_materials.n10.raw.pkl
     - ../data/models/vec4gloss-defgen-220629-1250
     outs:
-    - ../data/nouns_vec4gloss_frameinfo_list.pkl
+    - ../data/rating_tokenparams_list.pkl

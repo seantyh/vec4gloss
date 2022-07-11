@@ -9,3 +9,5 @@
 /annot_frameinfo_list.pkl
 /rating_materials.n10.raw.pkl
 /nouns_vec4gloss_frameinfo_list.pkl
+/annot_tokenparams_list.pkl
+/rating_tokenparams_list.pkl
