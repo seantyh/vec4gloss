@@ -1,5 +1,5 @@
 ```mermaid
-flowchart TD
+flowchart LR
 	node1["..\data\annotation.json.dvc"]
 	node2["..\data\asbc5_words_pos.pkl.dvc"]
 	node3["..\data\def_frame_annot_sense_ids.txt.dvc"]

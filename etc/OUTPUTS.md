@@ -1,5 +1,5 @@
 ```mermaid
-flowchart TD
+flowchart LR
 	node1["data\annot_tokenparams_list.pkl"]
 	node2["data\annotation.json"]
 	node3["data\asbc5_words_pos.pkl"]
