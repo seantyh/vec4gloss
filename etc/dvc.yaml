@@ -32,7 +32,13 @@ stages:
     - ../data/models/vec4gloss-defgen-220629-1250/
     desc: |
       v1.1 is same as v1.0, but runs for 10 epochs
-
+  auto_metrics:
+    cmd: nbconvert --execute --inplace --to notebook 30.61-auto-evals.ipynb
+    deps:    
+    - ../data/defgen_dataset_cwn
+    - ../data/models/vec4gloss-defgen-220629-1250
+    outs:
+    - ../data/auto_metrics.csv           
   prepare_rating:
     cmd: nbconvert --execute --inplace --to notebook 30.01-prepare-rating.ipynb
     deps:
