@@ -1,0 +1,4 @@
+# Vec4Gloss
+
+## Reproducibility
+The notebooks in `/etc` include the input and output hashes of data objects, and DVC manages the same information in `etc/dvc.yaml` and `etc/dvc.lock`. However, the textual data hash might still be different, even with the same content. The difference results from the CRLFs' automatic conversion to LF in git/DVC. The hash in notebooks and some of the `dvc.lock` are calculated under Windows (the CRLF). Therefore, expect the hash differences on the text objects.
