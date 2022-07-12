@@ -194,3 +194,23 @@ stages:
     - path: ../data/token-params-annot.csv
       md5: e698ab80c5bf12b394f9d538f0978a4a
       size: 55623
+  figure_rating:
+    cmd: nbconvert --inplace --execute 90.10-paper-figure-rating.ipynb
+    deps:
+    - path: ../data/token-params-ratings.csv
+      md5: 72f9bc05ebf81fd3640727e6bc6213d3
+      size: 8987
+    outs:
+    - path: ../data/plots/90.10-dep-scores.png
+      md5: f1393e88ee799db890ec56c0b606d61e
+      size: 50827
+  figure_annot:
+    cmd: nbconvert --inplace --execute 90.12-paper-figure-annot.ipynb
+    deps:
+    - path: ../data/token-params-annot.csv
+      md5: e698ab80c5bf12b394f9d538f0978a4a
+      size: 55623
+    outs:
+    - path: ../data/plots/90.12-chunk-types.png
+      md5: 1cf3af227029d5cedc5b9cdd7a0feee9
+      size: 73735

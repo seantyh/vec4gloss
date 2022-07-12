@@ -86,3 +86,15 @@ stages:
     - ../data/annot_tokenparams_list.pkl
     outs:
     - ../data/token-params-annot.csv
+  figure_rating:
+    cmd: nbconvert --inplace --execute 90.10-paper-figure-rating.ipynb
+    deps:
+    - ../data/token-params-ratings.csv
+    outs:
+    - ../data/plots/90.10-dep-scores.png
+  figure_annot:
+    cmd: nbconvert --inplace --execute 90.12-paper-figure-annot.ipynb
+    deps:
+    - ../data/token-params-annot.csv
+    outs:
+    - ../data/plots/90.12-chunk-types.png
