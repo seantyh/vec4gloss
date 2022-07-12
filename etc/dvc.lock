@@ -214,3 +214,18 @@ stages:
     - path: ../data/plots/90.12-chunk-types.png
       md5: 1cf3af227029d5cedc5b9cdd7a0feee9
       size: 73735
+  auto_metrics:
+    cmd: nbconvert --execute --inplace --to notebook 30.61-auto-evals.ipynb
+    deps:
+    - path: ../data/defgen_dataset_cwn
+      md5: 50ce6b30ae21a92b0a9628d38454adf6.dir
+      size: 14780471
+      nfiles: 7
+    - path: ../data/models/vec4gloss-defgen-220629-1250
+      md5: e0f49df34efc0a772f06915b441cb224.dir
+      size: 2350329979
+      nfiles: 7
+    outs:
+    - path: ../data/auto_metrics.csv
+      md5: fe5db7be9d4ca3a6df06e99bde87ea7b
+      size: 516650
