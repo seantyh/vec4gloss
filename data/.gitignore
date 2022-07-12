@@ -11,3 +11,5 @@
 /nouns_vec4gloss_frameinfo_list.pkl
 /annot_tokenparams_list.pkl
 /rating_tokenparams_list.pkl
+/token-params-ratings.csv
+/token-params-annot.csv

@@ -174,3 +174,23 @@ stages:
     - path: ../data/rating_tokenparams_list.pkl
       md5: 6d42b0b9019fc1d9d6887b93828bb8be
       size: 123119
+  rating-params:
+    cmd: nbconvert --inplace --execute --to notebook 32.20-tok-params-ratings.ipynb
+    deps:
+    - path: ../data/rating_tokenparams_list.pkl
+      md5: 6d42b0b9019fc1d9d6887b93828bb8be
+      size: 123119
+    outs:
+    - path: ../data/token-params-ratings.csv
+      md5: 72f9bc05ebf81fd3640727e6bc6213d3
+      size: 8987
+  annot-params:
+    cmd: nbconvert --inplace --execute --to notebook 32.22-tok-params-annot.ipynb
+    deps:
+    - path: ../data/annot_tokenparams_list.pkl
+      md5: b6eca6d230aa090e1b5cab463297e5cc
+      size: 437965
+    outs:
+    - path: ../data/token-params-annot.csv
+      md5: e698ab80c5bf12b394f9d538f0978a4a
+      size: 55623

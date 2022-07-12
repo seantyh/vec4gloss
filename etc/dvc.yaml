@@ -74,3 +74,15 @@ stages:
     - ../data/models/vec4gloss-defgen-220629-1250
     outs:
     - ../data/rating_tokenparams_list.pkl
+  rating-params:
+    cmd: nbconvert --inplace --execute --to notebook 32.20-tok-params-ratings.ipynb
+    deps:
+    - ../data/rating_tokenparams_list.pkl
+    outs:
+    - ../data/token-params-ratings.csv
+  annot-params:
+    cmd: nbconvert --inplace --execute --to notebook 32.22-tok-params-annot.ipynb
+    deps:
+    - ../data/annot_tokenparams_list.pkl
+    outs:
+    - ../data/token-params-annot.csv
