@@ -202,8 +202,8 @@ stages:
       size: 8987
     outs:
     - path: ../data/plots/90.10-dep-scores.png
-      md5: f1393e88ee799db890ec56c0b606d61e
-      size: 50827
+      md5: 3dd5cd27177da32b29befb9b49133130
+      size: 50686
   figure_annot:
     cmd: nbconvert --inplace --execute 90.12-paper-figure-annot.ipynb
     deps:
