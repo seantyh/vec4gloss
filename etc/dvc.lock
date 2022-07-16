@@ -212,8 +212,8 @@ stages:
       size: 55623
     outs:
     - path: ../data/plots/90.12-chunk-types.png
-      md5: 1cf3af227029d5cedc5b9cdd7a0feee9
-      size: 73735
+      md5: 1078c3fac54bb5775afec1435482abb2
+      size: 95611
   auto_metrics:
     cmd: nbconvert --execute --inplace --to notebook 30.61-auto-evals.ipynb
     deps:
